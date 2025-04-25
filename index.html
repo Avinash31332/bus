@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mappls Directions</title>
-  <link
-    rel="stylesheet"
-    href="https://apis.mappls.com/advancedmaps/v1/41a36096187f14cf1d5c853b58ad3ede/map_sdk.css"
-  />
+  <link rel="stylesheet" href="https://apis.mappls.com/advancedmaps/v1/YOUR_API_KEY/map_sdk.css" />
   <style>
     #map {
       height: 100vh;
@@ -18,33 +15,31 @@
 <body>
   <div id="map"></div>
 
-  <!-- Load SDK Scripts -->
-  <script
-    src="https://apis.mappls.com/advancedmaps/v1/41a36096187f14cf1d5c853b58ad3ede/map_sdk.js"
-    defer
-  ></script>
-  <script
-    src="https://apis.mappls.com/advancedmaps/v1/41a36096187f14cf1d5c853b58ad3ede/mappls-direction@1.5.4.js"
-    defer
-  ></script>
+  <!-- Load Mappls SDK and Directions API -->
+  <script src="https://apis.mappls.com/advancedmaps/v1/YOUR_API_KEY/map_sdk.js" defer></script>
+  <script src="https://apis.mappls.com/advancedmaps/v1/YOUR_API_KEY/mappls-direction@1.5.4.js" defer></script>
 
   <script>
-    window.onload = function () {
-      if (typeof mappls !== "undefined") {
-        const mapObject = new mappls.Map("map", {
-          center: [77.5946, 12.9716], // Starting location (Bangalore)
-          zoom: 12,
-        });
-
-        mappls.direction({
-          map: mapObject,
-          start: [77.5946, 12.9716], // Starting point
-          end: [78.4867, 17.3850], // Ending point (Hyderabad)
-          profile: "driving", // Travel by driving
-        });
-      } else {
-        console.error("Mappls API is not loaded");
+    window.onload = function() {
+      // Check if Mappls API is properly loaded
+      if (typeof mappls === 'undefined') {
+        console.error('Mappls API is not loaded properly');
+        return;
       }
+
+      // Initialize the map
+      const mapObject = new mappls.Map('map', {
+        center: [77.5946, 12.9716],  // Starting location (Bangalore)
+        zoom: 12
+      });
+
+      // Add direction service
+      mappls.direction({
+        map: mapObject,
+        start: [77.5946, 12.9716],  // Starting point (Bangalore)
+        end: [78.4867, 17.3850],    // Ending point (Hyderabad)
+        profile: 'driving'          // Travel by driving
+      });
     };
   </script>
 </body>
