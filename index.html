@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mappls Directions</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://apis.mappls.com/advancedmaps/v1/41a36096187f14cf1d5c853b58ad3ede/map_sdk.css" />
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Load SDK Scripts -->
+  <script src="https://apis.mappls.com/advancedmaps/v1/41a36096187f14cf1d5c853b58ad3ede/map_sdk.js"></script>
+  <script src="https://apis.mappls.com/advancedmaps/v1/41a36096187f14cf1d5c853b58ad3ede/mappls-direction@1.5.4.js"></script>
+
+  <script>
+    window.onload = function() {
+      const mapObject = new mappls.Map('map', {
+        center: [77.5946, 12.9716], // Starting location (Bangalore)
+        zoom: 12
+      });
+
+      mappls.direction({
+        map: mapObject,
+        start: [77.5946, 12.9716], // Starting point
+        end: [78.4867, 17.3850],   // Ending point (Hyderabad)
+        profile: 'driving'         // Travel by driving
+      });
+    };
+  </script>
+</body>
+</html>
