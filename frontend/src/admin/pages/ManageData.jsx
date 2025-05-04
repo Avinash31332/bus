@@ -21,7 +21,7 @@ function ManageData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/api/admin/me");
+        const res = await axios.get("/api/admin/me", { withCredentials: true });
         const data = res.data;
 
         setStudents(Array.isArray(data.students) ? data.students : []);
