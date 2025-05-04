@@ -31,7 +31,7 @@ export default function AdminAuth() {
           password: formData.password,
         });
         alert("Logged in as: " + res.data.admin.name);
-        navigate("/");
+        navigate("/admin/dashboard");
       } else {
         const res = await axios.post("/api/admin/register", formData);
         alert("Registered as: " + res.data.name);
