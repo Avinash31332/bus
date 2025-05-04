@@ -46,7 +46,7 @@ export default function StudentDriverCreate() {
         mode === "student"
           ? "/api/admin/student/create"
           : "/api/admin/driver/create";
-      const res = await axios.post(url, formData);
+      const res = await axios.post(url, formData, { withCredentials: true });
       alert(
         `${mode === "student" ? "Student" : "Driver"} created: ${res.data.name}`
       );

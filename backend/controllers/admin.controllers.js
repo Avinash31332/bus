@@ -233,9 +233,11 @@ export const allDrivers = async (req, res) => {
 // Create driver under a specific admin
 export const createDriver = async (req, res) => {
   const { name, email, phone, institutionType, password } = req.body;
-  const adminId = req.user.adminId;
-  if (!adminId)
+  const adminId = req.user.id; // Get adminId from token payload (set by middleware)
+
+  if (!adminId) {
     return res.status(400).json({ message: "Admin ID is required" });
+  }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -250,12 +252,15 @@ export const createDriver = async (req, res) => {
     });
 
     // Add driver reference to admin
-    await Admin.findByIdAndUpdate(adminId, { $push: { drivers: driver._id } });
+    await Admin.findByIdAndUpdate(adminId, {
+      $push: { drivers: driver._id },
+    });
 
     res.status(201).json(driver);
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Failed to create driver", error: err.message });
+    res.status(500).json({
+      message: "Failed to create driver",
+      error: err.message,
+    });
   }
 };
