@@ -26,16 +26,12 @@ export default function AdminAuth() {
     e.preventDefault();
     try {
       if (isLogin) {
-        const res = await axios.post(
-          "/api/admin/login",
-          {
-            email: formData.email,
-            password: formData.password,
-          },
-          { withCredentials: true }
-        );
+        const res = await axios.post("/api/admin/login", {
+          email: formData.email,
+          password: formData.password,
+        });
         alert("Logged in as: " + res.data.admin.name);
-        navigate("/admin/dashboard");
+        navigate("/admin/dashboard/manage-data");
       } else {
         const res = await axios.post("/api/admin/register", formData);
         alert("Registered as: " + res.data.name);

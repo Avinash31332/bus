@@ -28,7 +28,7 @@ export default function AdminDashboard() {
   }, []);
 
   const menuItems = [
-    { name: "Home", icon: HomeIcon, key: "home", path: "/admin/dashboard" },
+    // { name: "Home", icon: HomeIcon, key: "home", path: "/admin/dashboard" },
     {
       name: "Manage Data",
       icon: UserPlusIcon,

@@ -12,6 +12,16 @@ import ManageData from "./admin/pages/ManageData";
 import EditCollegeData from "./admin/pages/EditCollegeData";
 import Billing from "./admin/pages/Billing";
 import AdminProfile from "./admin/pages/AdminProfile";
+import DriverHome from "./driver/pages/HomePage";
+import DriverInterface from "./driver/DriverInterface";
+import DriverProfile from "./driver/pages/ProfilePage";
+import DriverAuth from "./driver/pages/DriverAuth";
+import SupportPage from "./driver/pages/SupportPage";
+import StudentInterface from "./student/StudentInterface.jsx";
+import StudentSupport from "./student/pages/StudentSupportPage.jsx";
+import StudentProfile from "./student/pages/StudentProfile.jsx";
+import StudentHome from "./student/pages/StudentHome.jsx";
+import StudentAuth from "./student/pages/StudentAuth.jsx";
 
 function App() {
   return (
@@ -35,6 +45,22 @@ function App() {
             <Route path="edit-college-data" element={<EditCollegeData />} />
             <Route path="billing" element={<Billing />} />
             <Route path="profile" element={<AdminProfile />} />
+          </Route>
+          <Route path="/driver/login" element={<DriverAuth />} />
+          <Route path="/student/login" element={<StudentAuth />} />
+
+          {/* driver routes */}
+          <Route path="/driver" element={<DriverInterface />}>
+            <Route path="" element={<DriverHome />} />
+            <Route path="support" element={<SupportPage />} />
+            <Route path="profile-page" element={<DriverProfile />} />
+          </Route>
+
+          {/* student routes */}
+          <Route path="/student" element={<StudentInterface />}>
+            <Route path="" element={<StudentHome />} />
+            <Route path="support" element={<StudentSupport />} />
+            <Route path="profile-page" element={<StudentProfile />} />
           </Route>
         </Routes>
       </div>

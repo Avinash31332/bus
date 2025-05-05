@@ -27,3 +27,42 @@ export const loginDriver = async (req, res) => {
     res.status(500).json({ message: "Login failed", error: err.message });
   }
 };
+
+export const getDriverProfile = async (req, res) => {
+  try {
+    const driverId = req.user.id; // Make sure middleware sets req.user
+    const driver = await Driver.findById(driverId)
+      .select("-password")
+      .populate("adminId");
+    if (!driver) return res.status(404).json({ message: "Driver not found" });
+    res.status(200).json({ driver });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch profile", error: err.message });
+  }
+};
+
+export const getSupportInfo = async (req, res) => {
+  try {
+    const driverId = req.user.id; // Already available from middleware
+    const driver = await Driver.findById(driverId).populate("adminId");
+
+    if (!driver || !driver.adminId) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    const { name, email, phone, collegeName, institutionType, address } =
+      driver.adminId;
+
+    res.status(200).json({
+      admin: { name, email, phone, collegeName, institutionType, address },
+    });
+  } catch (err) {
+    console.error("Error fetching support info:", err);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch support info", error: err.message });
+  }
+};
+``;
